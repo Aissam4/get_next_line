@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:23:43 by abarchil          #+#    #+#             */
-/*   Updated: 2021/11/15 22:56:52 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/11/15 19:28:26 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char	*reminder(char *str)
 {
 	char	*rst_tab;
 	int	count;
-	int	len;
+	int	i;
 	
 	count = 0;
-	len = ft_strlen(str);
+	i = 0;
 	if (!str)
 		return (NULL);
 	while (str[count] && str[count] != '\n')
@@ -49,12 +49,17 @@ char	*reminder(char *str)
 		str = NULL;
 		return (0);
 	}
-	rst_tab = (char *)malloc(sizeof(char) * len - count);
+	rst_tab = (char *)malloc(sizeof(char) * (ft_strlen(str) - count + 1));
 	if (!rst_tab)
 		return (NULL);
 	count++;
-	ft_memmove(rst_tab, str + count, len - count);
-	rst_tab[len - count] = '\0';
+	while (str[count])
+	{
+		rst_tab[i] = str[count];
+		i++;
+		count++;
+	}
+	rst_tab[i] = '\0';
 	free (str);
 	return (rst_tab);
 }
@@ -67,12 +72,9 @@ char	*get_next_line(int fd)
 	int		byte;
 
 	byte = 1;
-	if (fd < 0 || BUFFER_SIZE <= 0) 
+	if (fd < 0 || BUFFER_SIZE <= 0 || !(buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1)))
 		return (NULL);
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!buffer)
-		return (NULL);
-	while (byte != 0 && !ft_str_search(s))
+	while (byte > 0 && !ft_str_search(s))
 	{
 		byte = read(fd, buffer, BUFFER_SIZE);
 		if (byte == -1)
