@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:23:43 by abarchil          #+#    #+#             */
-/*   Updated: 2021/11/16 12:07:18 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:47:40 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ char	*reminder(char *str)
 char	*get_next_line(int fd)
 {
 	char	*buffer;
-	static	char	*s;
+	static	char	*s[4096];
 	char	*line;
 	int		byte;
 
 	byte = 1;
 	if (fd < 0 || BUFFER_SIZE <= 0 || !(buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1)))
 		return (NULL);
-	while (byte > 0 && !ft_str_search(s))
+	while (byte > 0 && !ft_str_search(s[fd]))
 	{
 		byte = read(fd, buffer, BUFFER_SIZE);
 		if (byte == -1)
@@ -93,11 +93,11 @@ char	*get_next_line(int fd)
 			break;
 		}
 		buffer[byte] = '\0';
-		s = ft_strjoin(s, buffer);
+		s[fd] = ft_strjoin(s[fd], buffer);
 	}
 	free(buffer);
-	line = put_line(s);
-	s = reminder(s);
+	line = put_line(s[fd]);
+	s[fd] = reminder(s[fd]);
 	return (line);
 }
 // int main(void)
