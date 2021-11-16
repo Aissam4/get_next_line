@@ -6,11 +6,12 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:29:07 by abarchil          #+#    #+#             */
-/*   Updated: 2021/11/15 17:18:23 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/11/16 18:56:55 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
 size_t	ft_strlen(const char *s)
 {
 	int	i;
