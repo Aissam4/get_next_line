@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:23:43 by abarchil          #+#    #+#             */
-/*   Updated: 2021/11/15 19:28:26 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/11/16 12:07:18 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ char	*reminder(char *str)
 	}
 	rst_tab[i] = '\0';
 	free (str);
+	if (ft_strlen(rst_tab) == 0)
+	{
+		free(rst_tab);
+		return(NULL);
+	}
 	return (rst_tab);
 }
 
